@@ -99,7 +99,7 @@ public class AdminDispatcherServlet extends HttpServlet {
                 }
                 // Case nay dan den trang ad_page_costumer.jsp
                 case IMyConstant.AD_ACTION_PAGE_REQUEST: {
-                    
+
                     url = IMyConstant.AD_PAGE_REQUEST;
                     break;
                 }
@@ -125,6 +125,19 @@ public class AdminDispatcherServlet extends HttpServlet {
                 // Case nay dan den trang ad_page_costumer.jsp
                 case IMyConstant.AD_ACTION_PAGE_SETTING: {
                     url = IMyConstant.AD_PAGE_SETTING;
+                    break;
+                }
+                
+                
+                // Case nay de TE quan li
+                case IMyConstant.TE_ACTION_PAGE_REQUEST: {
+                    url = IMyConstant.TE_PAGE_REQUEST;
+                    break;
+                }
+                
+                // Case nay de ST quan li
+                case IMyConstant.ST_ACTION_PAGE_REQUEST: {
+                    url = IMyConstant.ST_PAGE_REQUEST;
                     break;
                 }
 

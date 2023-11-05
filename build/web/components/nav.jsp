@@ -144,14 +144,14 @@
 
                             <c:when test="${sessionScope.staff.srole == 'TE'}">
 
-                                <a href="#">TE</a>
+                                <a href="AdminDispatcherServlet?action=tepagerequest">Request</a>
                                 <!--Cai dat tai khoan-->
                                 <a href="AdminDispatcherServlet?action=adpagesetting">Setting</a>
                             </c:when>
 
                             <c:when test="${sessionScope.staff.srole == 'ST'}">
 
-                                <a href="#">ST</a>
+                                <a href="AdminDispatcherServlet?action=stpagerequest">Request</a>
                                 <!--Cai dat tai khoan-->
                                 <a href="AdminDispatcherServlet?action=adpagesetting">Setting</a>
                             </c:when>

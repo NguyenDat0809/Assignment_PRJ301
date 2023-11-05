@@ -176,6 +176,42 @@ public class RequestDAO {
             }
         }
     }
+    
+    public ArrayList<Request> getListRequestsBySid(String Sid) throws Exception {
+        ArrayList<Request> list = new ArrayList<Request>();
+        String sql = "select * from tblRequest where Sid = ?";
+        ResultSet rs = null;
+        try {
+            UserDAO ud = new UserDAO();
+            StaffDAO sd = new StaffDAO();
+            cn = JDBC.getConnection();
+            ps = cn.prepareStatement(sql);
+            ps.setString(1, Sid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("Rid");
+                int rtId = rs.getInt("RTid");
+                String des = rs.getString("description");
+                LocalDate rDate = rs.getDate("Rdate").toLocalDate();
+                int rstatus = rs.getInt("Rstatus");
+                User c = ud.getUser(rs.getString("Cid"));
+                Staff s = sd.getStaff(rs.getBigDecimal("Sid"));
+                RequestType rtid = this.getRequestType(rtId);
+                list.add(new Request(id, rtid, des, rDate, rstatus, c, s));
+            }
+            return list;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+    }
 
     public boolean removeRequests(int Rid) throws Exception {
         String sql = "delete from tblRequest where Rid = ? ";
