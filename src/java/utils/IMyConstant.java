@@ -12,7 +12,7 @@ package utils;
 public interface IMyConstant {
 
     //các đường dẫn
-    public static final String PAGE_WELCOME= "welcome.jsp";
+    public static final String PAGE_WELCOME = "welcome.jsp";
     public static final String PAGE_LOGIN = "page_login.jsp";
     public static final String PAGE_REGISTER = "page_register.jsp";
     public static final String PAGE_SERVICES = "page_services.jsp";
@@ -78,4 +78,12 @@ public interface IMyConstant {
     public static final String AD_ACTION_PAGE_SETTING = "adpagesetting";
     public static final String AD_PAGE_SETTING = "ad_page_setting.jsp";
 
+    
+    //    FOR TE
+    public static final String TE_ACTION_PAGE_REQUEST = "tepagerequest";
+    public static final String TE_PAGE_REQUEST = "te_page_request.jsp";
+    
+    // FOR ST
+    public static final String ST_ACTION_PAGE_REQUEST = "stpagerequest";
+    public static final String ST_PAGE_REQUEST = "st_page_request.jsp";
 }

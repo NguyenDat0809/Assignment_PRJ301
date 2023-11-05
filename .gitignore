@@ -1,1 +1,4 @@
 dist
+### Java ###
+*.class
+private.xml
