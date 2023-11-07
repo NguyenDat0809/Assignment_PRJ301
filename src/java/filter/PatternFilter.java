@@ -120,7 +120,6 @@ public class PatternFilter implements Filter {
                 request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_EDIT).forward(request, response);
                 
             } else if ( !"password".equals(target) && !Pattern.compile("[àảãáạăằẳẵắặâầẩẫấậ"
-
                     + "đeèẻẽéẹêềểễếệìỉĩíị"
                     + "òỏõóọôồổỗốộơờởỡớợùủũúụ"
                     + "ừửữứựỳỷỹýỵa-zA-Z0-9\\s]*").matcher(check.toLowerCase()).matches()) {
