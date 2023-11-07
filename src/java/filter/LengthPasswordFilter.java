@@ -108,10 +108,12 @@ public class LengthPasswordFilter implements Filter {
 
         Throwable problem = null;
         try {
+            request.removeAttribute("msg");
             //TO_DO: kiểm tra password có đủ độ rộng hay chưa, từ 6 ký tự trở lên và ko chứa các từ có dấu
             String check = request.getParameter("check");
             String recheck = request.getParameter("recheck");
-            if(check != null){
+            if(check != null && !check.isEmpty()){
+                System.out.println("IN NHA FILTER" + check);
                 if((check.length() < 6 || check.length() > 15)){
                     request.setAttribute("msg", "Password character must be from 6 to 15");
                     request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_REGISTER).forward(request, response);
