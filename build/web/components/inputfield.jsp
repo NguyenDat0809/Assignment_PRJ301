@@ -24,7 +24,7 @@
 <div>
     <label for="${param.field}" >${param.label}</label>
     <input type="${param.type}" value="<%=value%>"  id="${param.field}"  name="${param.field}" />
-    <p><%=error%></p>
+    <p style="color:red"><%=error%></p>
 </div>
 
 
