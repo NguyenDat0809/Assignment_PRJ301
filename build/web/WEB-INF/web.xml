@@ -28,6 +28,16 @@
         <filter-name>ADCheckCRUDataFilter</filter-name>
         <filter-class>filter.ADCheckCRUDataFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>LengthPasswordFilter</filter-name>
+        <filter-class>filter.LengthPasswordFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LengthPasswordFilter</filter-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    
     <filter-mapping>
         <filter-name>ADCheckCRUDataFilter</filter-name>
         <servlet-name>AdminDispatcherServlet</servlet-name>

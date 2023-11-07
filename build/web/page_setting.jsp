@@ -76,7 +76,7 @@
                     <td><a href="DispatcherServlet?action=editpage&target=cname">Edit</a></td>
                 </tr>
                 <tr>
-                    <td>Pasword</td>
+                    <td>Password</td>
                     <td>${sessionScope.userpass}</td>
                     <td><a href="DispatcherServlet?action=editpage&target=password">Edit</a></td>
                 </tr>
@@ -88,20 +88,20 @@
                 <tr>
                     <td>Account Premium</td>
                     <td>
-                        <c:catch>
-                            <c:when test="${sessionScope.user.cstatus == 'N'}">
+                        
+                            <c:if test="${sessionScope.user.cstatus == 'N'}">
                                 NONE
-                            </c:when>
-                            <c:when test="${sessionScope.user.cstatus == 'P'}">
+                            </c:if>
+                            <c:if test="${sessionScope.user.cstatus == 'P'}">
                                 PREMIUM
-                            </c:when>
-                            <c:when test="${sessionScope.user.cstatus == 'G'}">
+                            </c:if>
+                            <c:if test="${sessionScope.user.cstatus == 'G'}">
                                 GOLD
-                            </c:when>
-                            <c:when test="${sessionScope.user.cstatus == 'D'}">
+                            </c:if>
+                            <c:if test="${sessionScope.user.cstatus == 'D'}">
                                 DIAMOND
-                            </c:when>
-                        </c:catch>
+                            </c:if>
+                  
 
                     </td>
                 </tr>

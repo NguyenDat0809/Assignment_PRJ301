@@ -86,7 +86,7 @@ public class RegisterServlet extends HttpServlet {
                     }
                 } else {
                     request.setAttribute("msg", "User with email:" + email + " has been existed");
-                    request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_REGISTER).forward(request, response);
+                    request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_WELCOME).forward(request, response);
                 }
             }
         } catch (Exception ex) {
