@@ -94,19 +94,19 @@
         <c:if test="${sessionScope.staff != null}">
             <form class="form-container" action="AdminDispatcherServlet" onsubmit="return validatePassword();">
                 <h2 class="form-heading">Create New Staff</h2>
-                <label for="stname" class="form-label">Staff Name:</label>
+                <label for="stname" class="form-label">Name:</label>
                 <input type="text" required="" name="stname" class="form-input" placeholder="${requestScope.stname}">
                 <br>
-                <label for="stemail" class="form-label">Service Email:</label>
+                <label for="stemail" class="form-label">Email:</label>
                 <input type="email" required="" name="stemail" class="form-input" placeholder="${requestScope.stemail}">
                 <br>
-                <label for="stpass" class="form-label">Service Password:</label>
-                <input type="text" required="" name="stpass" class="form-input" placeholder="${requestScope.stpass}">
+                <label for="stpass" class="form-label">Password:</label>
+                <input type="password" required="" name="stpass" class="form-input" placeholder="${requestScope.stpass}">
                 <br>
-                <label for="stpassconfirm" class="form-label">Service Password Confirm:</label>
-                <input type="text" required="" name="stpassconfirm" class="form-input" placeholder="${requestScope.stpassconfirm}">
+                <label for="stpassconfirm" class="form-label">Password Confirm:</label>
+                <input type="password" required="" name="stpassconfirm" class="form-input" placeholder="${requestScope.stpassconfirm}">
                 <br>
-                <label for="strole" class="form-label">Service Status:</label>
+                <label for="strole" class="form-label">Role:</label>
                 <select name="strole" class="form-select">
                     <option value="TE" selected="">Technical Engineer</option>
                     <option value="ST">Supporter</option>

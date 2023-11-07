@@ -36,7 +36,7 @@
 
         </div>
         
-        <div style="display: block; text-align:center">
+        <div style="display: none; text-align:center">
             <span class="dot"></span> 
             <span class="dot"></span> 
             <span class="dot"></span> 

@@ -55,7 +55,8 @@
 
             /* Style form input fields */
             .staff-setting-content input[type="text"],
-            .staff-setting-content input[type="email"] {
+            .staff-setting-content input[type="email"],
+            .staff-setting-content input[type="password"]{
                 width: 100%;
                 padding: 5px;
                 margin: 5px 0;
@@ -97,7 +98,7 @@
                         <input name="stemail" type="email" value="${sessionScope.staff.email}" />
 
                         <label for="stpass">Password:</label>
-                        <input name="stpass" type="text" value="${sessionScope.staff.password}" />
+                        <input name="stpass" type="password" value="${sessionScope.staff.password}" />
 
                         <input name="strole" type="hidden" value="${sessionScope.staff.srole}" />
 

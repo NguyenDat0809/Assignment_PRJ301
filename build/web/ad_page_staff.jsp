@@ -144,7 +144,7 @@
                                             <label for="stemail">Email:</label>
                                             <input name="stemail" type="text" value="${st.email}" />
                                             <label for="stpass">Password:</label>
-                                            <input name="stpass" type="text" value="${st.password}"/>
+                                            <input name="stpass" type="password" value="${st.password}"/>
                                             <label for="strole">Role:</label>
                                             <select name="strole" class="form-staff">
                                                 <c:choose>
