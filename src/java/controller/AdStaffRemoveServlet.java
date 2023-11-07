@@ -45,6 +45,8 @@ public class AdStaffRemoveServlet extends HttpServlet {
                     request.getRequestDispatcher("ad_page_staff.jsp").forward(request, response);
                 }
             } catch (Exception e) {
+                request.setAttribute("removestaffresult", "This staff is working !");
+                request.getRequestDispatcher("ad_page_staff.jsp").forward(request, response);
             }
         }
     }
