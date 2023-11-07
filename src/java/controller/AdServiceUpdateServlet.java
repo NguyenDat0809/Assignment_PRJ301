@@ -45,7 +45,9 @@ public class AdServiceUpdateServlet extends HttpServlet {
             } else if ("false".equals(request.getParameter("svstatus"))) {
                 svstatus = false; // true thanh 0 thanh not working
             }
+            
             BigDecimal svcost = new BigDecimal(request.getParameter("svcost"));
+            
             Service service = new Service(svid, svname, svdes, svstatus, svcost);
             out.print(service.toString());
             if (service != null) {
@@ -57,7 +59,7 @@ public class AdServiceUpdateServlet extends HttpServlet {
                         request.setAttribute("updateserviceresult", "Update Service Fail !");
                     }
                 } catch (Exception e) {
-                    out.print(e.getMessage());
+                    request.getRequestDispatcher("error.html").forward(request, response);
                 }
             }
             request.getRequestDispatcher("ad_page_service.jsp").forward(request, response);

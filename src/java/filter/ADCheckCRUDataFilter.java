@@ -111,32 +111,45 @@ public class ADCheckCRUDataFilter implements Filter {
             }
 
             case "viewserviceupdate": {
-                String svname = request.getParameter("svname");
-                String svdes = request.getParameter("svdes");
-                String svstatus = request.getParameter("svstatus");
-                String svcost = request.getParameter("svcost");
-                if (svname == null || svdes == null || svstatus == null || svcost == null) {
+                String svname = "";
+                String svdes = "";
+                String svstatus = "";
+                String svcost = "";
+                try {
+                    svname = request.getParameter("svname");
+                    svdes = request.getParameter("svdes");
+                    svstatus = request.getParameter("svstatus");
+                    svcost = request.getParameter("svcost");
+                    if (svname == null || svdes == null || svstatus == null || svcost == null) {
+                        request.setAttribute("svname", svname);
+                        request.setAttribute("svdes", svdes);
+                        request.setAttribute("svcost", svcost);
+                        request.setAttribute("svstatus", svstatus);
+                        request.setAttribute("updateserviceresult", "Some fields was empty!");
+                        request.getRequestDispatcher("ad_page_service.jsp").forward(request, response);
+                    }
+                    if (Integer.parseInt(svcost) < 0) {
+                        request.setAttribute("svname", svname);
+                        request.setAttribute("svdes", svdes);
+                        request.setAttribute("svcost", svcost);
+                        request.setAttribute("svstatus", svstatus);
+                        request.setAttribute("updateserviceresult", "Service cost cannot be negative!");
+                        request.getRequestDispatcher("ad_page_service.jsp").forward(request, response);
+                    }
+                    if (svdes.length() > 50) {
+                        request.setAttribute("svname", svname);
+                        request.setAttribute("svdes", svdes);
+                        request.setAttribute("svcost", svcost);
+                        request.setAttribute("svstatus", svstatus);
+                        request.setAttribute("updateserviceresult", "Description must be less than 50 characters!");
+                        request.getRequestDispatcher("ad_page_service.jsp").forward(request, response);
+                    }
+                } catch (Exception e) {
                     request.setAttribute("svname", svname);
                     request.setAttribute("svdes", svdes);
                     request.setAttribute("svcost", svcost);
                     request.setAttribute("svstatus", svstatus);
-                    request.setAttribute("updateserviceresult", "Some fields was empty!");
-                    request.getRequestDispatcher("ad_page_service.jsp").forward(request, response);
-                }
-                if (Integer.parseInt(svcost) < 0) {
-                    request.setAttribute("svname", svname);
-                    request.setAttribute("svdes", svdes);
-                    request.setAttribute("svcost", svcost);
-                    request.setAttribute("svstatus", svstatus);
-                    request.setAttribute("updateserviceresult", "Service cost cannot be negative!");
-                    request.getRequestDispatcher("ad_page_service.jsp").forward(request, response);
-                }
-                if (svdes.length() > 50) {
-                    request.setAttribute("svname", svname);
-                    request.setAttribute("svdes", svdes);
-                    request.setAttribute("svcost", svcost);
-                    request.setAttribute("svstatus", svstatus);
-                    request.setAttribute("updateserviceresult", "Description must be less than 50 characters!");
+                    request.setAttribute("updateserviceresult", "Service cost cannot be empty!");
                     request.getRequestDispatcher("ad_page_service.jsp").forward(request, response);
                 }
                 break;
