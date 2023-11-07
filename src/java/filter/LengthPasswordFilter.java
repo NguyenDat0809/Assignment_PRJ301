@@ -16,14 +16,13 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 import utils.IMyConstant;
 
 /**
  *
  * @author 84859
  */
-public class PatternFilter implements Filter {
+public class LengthPasswordFilter implements Filter {
 
     private static final boolean debug = true;
 
@@ -32,13 +31,13 @@ public class PatternFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public PatternFilter() {
+    public LengthPasswordFilter() {
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("PatternFilter:DoBeforeProcessing");
+            log("LengthPasswordFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -66,7 +65,7 @@ public class PatternFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("PatternFilter:DoAfterProcessing");
+            log("LengthPasswordFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -102,33 +101,30 @@ public class PatternFilter implements Filter {
             throws IOException, ServletException {
 
         if (debug) {
-            log("PatternFilter:doFilter()");
+            log("LengthPasswordFilter:doFilter()");
         }
 
         doBeforeProcessing(request, response);
 
         Throwable problem = null;
         try {
-            HttpServletRequest req = (HttpServletRequest) request;
-            String target = req.getParameter("target"); //lấy ra loại muốn edit
-            String check = req.getParameter("check");
-            check = new String(check.getBytes("iso-8859-1"), "UTF-8");
-
-            if (target.equals("password") && (!Pattern.compile("[a-zA-Z0-9_!@#$%^&*]*").matcher(check.toLowerCase()).matches())) {
-                //password thì cần là chữ và các ký tự đặc biệt. TRÁNH DẤU VÀ CÁC KIỂU DẤU CÁCH
-                 request.setAttribute("msg", "The password have to be unsigned, not contain \".|,^~\" ");
-                request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_EDIT).forward(request, response);
-                
-            } else if ( !"password".equals(target) && !Pattern.compile("[àảãáạăằẳẵắặâầẩẫấậ"
-                    + "đeèẻẽéẹêềểễếệìỉĩíị"
-                    + "òỏõóọôồổỗốộơờởỡớợùủũúụ"
-                    + "ừửữứựỳỷỹýỵa-zA-Z0-9\\s]*").matcher(check.toLowerCase()).matches()) {
-                //tên và address thì ko dc có ký tự đặc biệt
-                request.setAttribute("msg", "Infor must not have  Special characters !,@,#,.... ");
-                request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_EDIT).forward(request, response);
-            } else {
-                chain.doFilter(request, response);
-            }
+            request.removeAttribute("msg");
+            //TO_DO: kiểm tra password có đủ độ rộng hay chưa, từ 6 ký tự trở lên và ko chứa các từ có dấu
+            String check = request.getParameter("check");
+            String recheck = request.getParameter("recheck");
+            if(check != null && !check.isEmpty()){
+                System.out.println("IN NHA FILTER" + check);
+                if((check.length() < 6 || check.length() > 15)){
+                    request.setAttribute("msg", "Password character must be from 6 to 15");
+                    request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_REGISTER).forward(request, response);
+                }else if(!check.equals(recheck)){
+                    request.setAttribute("msg", "Confirm Password is incorrect");
+                    request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_REGISTER).forward(request, response);
+                }else if(!Pattern.compile("[a-zA-Z0-9_!@#$%^&*]*").matcher(check.toLowerCase()).matches()){
+                    request.setAttribute("msg", " \"The password have to be unsigned, not contain \".|,^~\"");
+                    request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_REGISTER).forward(request, response);
+                }else chain.doFilter(request, response);
+            }else chain.doFilter(request, response);
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
@@ -181,7 +177,7 @@ public class PatternFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {
-                log("PatternFilter:Initializing filter");
+                log("LengthPasswordFilter:Initializing filter");
             }
         }
     }
@@ -192,9 +188,9 @@ public class PatternFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("PatternFilter()");
+            return ("LengthPasswordFilter()");
         }
-        StringBuffer sb = new StringBuffer("PatternFilter(");
+        StringBuffer sb = new StringBuffer("LengthPasswordFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
