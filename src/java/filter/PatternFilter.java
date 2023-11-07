@@ -113,20 +113,22 @@ public class PatternFilter implements Filter {
             String target = req.getParameter("target"); //lấy ra loại muốn edit
             String check = req.getParameter("check");
             check = new String(check.getBytes("iso-8859-1"), "UTF-8");
-  
+
             if (target.equals("password") && (!Pattern.compile("[a-zA-Z0-9_!@#$%^&*]*").matcher(check.toLowerCase()).matches())) {
                 //password thì ko dc có dấu
-                 request.setAttribute("msg", "The password have to be unsigned, not contain \".|,^~\" ");
+                request.setAttribute("msg", "The password have to be unsigned, not contain \".|,^~\" ");
                 request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_EDIT).forward(request, response);
-                
-            } else if ( !target.equals("password") && !Pattern.compile("[àảãáạăằẳẵắặâầẩẫấậ"
+
+            } else if (!target.equals("password") && !Pattern.compile("[àảãáạăằẳẵắặâầẩẫấậ"
                     + "đeèẻẽéẹêềểễếệìỉĩíị"
                     + "òỏõóọôồổỗốộơờởỡớợùủũúụ"
                     + "ừửữứựỳỷỹýỵa-zA-Z0-9\\s]*").matcher(check.toLowerCase()).matches()) {
                 //tên và address thì ko dc có ký tự đặc biệt
                 request.setAttribute("msg", "Infor must not have  Special characters !,@,#,.... ");
                 request.getRequestDispatcher("DispatcherServlet?action=" + IMyConstant.ACTION_PAGE_EDIT).forward(request, response);
-            } else chain.doFilter(request, response);
+            } else {
+                chain.doFilter(request, response);
+            }
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
